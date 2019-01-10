@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<header>
+	<title>Edit menu</title>
+</header>
+
+<body>
+	<h1>{{restaurant.name}} restaurant</h1>
+	<h2>Edit "{{menu.name}}"</h2>
+	<form action="{{url_for('EditMenu', restaurant_id = restaurant.id, menu_id = menu.id)}}", method = 'POST'>
+		<h3>New name:</h3>
+		<input type="text" placeholder="New name" name="new_name">
+		<button type="submit">Rename</button>
+	</form>
+</body>
+</html>
+

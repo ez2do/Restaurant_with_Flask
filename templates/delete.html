@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Do you want to delete?</title>
+</head>
+<body>
+	<h1>{{restaurant.name}} restaurant</h1>
+	<h2>Are you sure to delete "{{menu.name}}"</h2>
+	<form action="{{url_for('DeleteMenu', restaurant_id = restaurant.id, menu_id = menu.id)}}", method = 'POST'>
+		<button type="radio" name="option" value="yes">Yes</button>
+		<button type="radio" name="option" value="no">No</button>
+	</form>
+</body>
+</html>

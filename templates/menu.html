@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>All menu</title>
+</head>
+
+<body>
+	<h1>All delicious around the world</h1>
+	{% for menu in menus %}
+	<font size="4">{{menu.id}}. {{menu.name}}</font><br>
+	<font size="4">{{menu.price}}</font><br>
+	<font size="4">{{menu.description}}</font><br><br>
+	{% endfor %}
+</body>
+</html>

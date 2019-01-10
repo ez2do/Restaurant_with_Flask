@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Eat what now?</title>
+	<style>
+		h1{
+			text-align: center;
+			font-family: serif;
+			color: blue;
+		}
+		.main{
+			width: 100%;
+			display: flex;
+		}
+		.half{
+			width: 39%;
+			height: 70vh;
+			padding: 0 5%;
+		}
+		.menu-img{
+			width: 100%;
+			height: 100%;
+			background-image: url({{url_for('static', filename='menu.jpg')}});
+			background-position: center; /* Center the image */
+  			background-repeat: no-repeat; /* Do not repeat the image */
+  			background-size: contain;
+		}
+		.restaurant-img{
+			width: 100%;
+			height: 100%;
+			background-image: url({{url_for('static', filename='restaurant.jpg')}});
+			background-position: center; /* Center the image */
+  			background-repeat: no-repeat; /* Do not repeat the image */
+  			background-size: contain;
+		}
+		.info{
+			padding-top: 20px;
+			text-align: center;
+			line-height: 40px;
+			font-size: 40 !important;
+			font-weight: 5;
+		}
+		.half a{
+			text-decoration: none;
+			color: blue;
+		}
+	</style>
+
+</head>
+<body>
+	<h1>Where to eat now, here's the answer!</h1>
+	<div class="main">
+		<div class="half">
+			<a href="{{url_for('ShowMenu')}}"><div class="menu-img"></div></a>
+			<a href="{{url_for('ShowMenu')}}"><div class="info"><font size="5">Menus</font></div></a>
+		</div>
+
+		<div class="half">
+			<a href="{{url_for('ShowRestaurants')}}"><div class="restaurant-img"></div></a>
+			<a href="{{url_for('ShowRestaurants')}}"><div class="info"><font size="5">Restaurants</font></div></a>
+		</div>
+</body>
+</html>
