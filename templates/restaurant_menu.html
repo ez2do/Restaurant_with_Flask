@@ -7,7 +7,19 @@
 <body>
 	<h1>Welcome to {{restaurant.name}}</h1>
 
-	<h2><a href={{url_for('NewMenu', restaurant_id = restaurant.id)}}>Add new Menu</a></h2>
+	<!-- process flash -->
+	{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	<ul>
+		{% for message in messages %}
+		<li><strong>{{message}}</strong></li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+	{% endwith %}
+		
+
+	<h2><a href="{{url_for('NewMenu', restaurant_id = restaurant.id)}}">Add new Menu</a></h2>
 	
 	{% for menu in menus %}
 	<font size="4">{{menu.id}}. {{menu.name}}</font><br>
