@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, request, redirect, flash
+from flask import Flask, render_template, url_for, request, redirect, flash, jsonify
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Restaurant, Base, MenuItem
@@ -74,6 +74,7 @@ def EditMenu(restaurant_id, menu_id):
 	else:
 		return render_template('edit.html', restaurant = restaurant, menu = menu)
 
+#delete menu item
 @app.route('/menu/delete/<int:restaurant_id>/<int:menu_id>', methods = ['POST', 'GET'])
 def DeleteMenu(restaurant_id, menu_id):
 	restaurant = session.query(Restaurant).filter_by(id = restaurant_id).one()
@@ -83,10 +84,24 @@ def DeleteMenu(restaurant_id, menu_id):
 		if option == 'yes':
 			session.delete(menu)
 			session.commit()
+			flash('Item has been deleted!')
 		return redirect(url_for('ShowRestaurantMenu', restaurantID = restaurant.id))
 
 	else:
 		return render_template('delete.html', restaurant = restaurant, menu = menu)
+
+#making API endpoint for GET request
+@app.route('/restaurants/<int:restaurant_id>/menu/JSON')
+def menuJSON(restaurant_id):
+	restaurant = session.query(Restaurant).filter_by(id = restaurant_id).one()
+	menu_items = session.query(MenuItem).filter_by(restaurant_id = restaurant_id).all()
+	return jsonify(MenuItems = [i.serialize for i in menu_items])
+
+@app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_id>/JSON')
+def itemJSON(restaurant_id, menu_id):
+	restaurant = session.query(Restaurant).filter_by(id = restaurant_id).one()
+	item = session.query(MenuItem).filter_by(id = menu_id).one()
+	return jsonify(Item = item.serialize)
 
 if __name__ == '__main__':
 	app.secret_key = 'strong_password'
